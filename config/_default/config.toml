@@ -1,0 +1,4 @@
+baseURL = "https://friesoft.org"
+languageCode = "en-us"
+title = "Bernhard Friedreich"
+theme = "academia-hugo"
