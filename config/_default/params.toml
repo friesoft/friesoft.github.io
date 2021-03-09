@@ -1,6 +1,8 @@
 # SITE SETUP
 # Documentation: https://sourcethemes.com/academic/
 
+Name = "friesoft"
+
 # marketing
 microsoft_clarity = ""
 
