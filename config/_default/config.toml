@@ -1,4 +1,4 @@
-baseURL = "https://friesoft.org"
+baseURL = "https://friesoft.github.io"
 languageCode = "en-us"
 title = "Bernhard Friedreich"
 theme = "academia-hugo"
