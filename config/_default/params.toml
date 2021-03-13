@@ -44,6 +44,8 @@ math = false
 #   Anonymize IP in Google Analytics (if enabled)
 privacy_pack = false
 
+googleAnalytics = "UA-26032370-1"
+
 # Date and time format (refer to https://sourcethemes.com/academic/docs/customization/#date-format )
 #   Examples: "Mon, Jan 2, 2006" or "2006-01-02"
 date_format = "Jan 2, 2006"
@@ -55,7 +57,7 @@ time_format = "3:04 PM"
 ############################
 
 # Enter contact details (optional). To hide a field, clear it to "".
-email = "test@example.org"
+email = "friesoft@gmail.com"
 phone = ""
 address = "Vienna, Austria"
 
@@ -63,7 +65,7 @@ address = "Vienna, Austria"
 office_hours = ""
 
 # Enter an optional link for booking appointments (e.g. calendly.com).
-appointment_url = "https://calendly.com"
+#appointment_url = "https://calendly.com"
 
 # Contact links
 #   Set to `[]` to disable, or comment out unwanted lines with a hash `#`.
@@ -108,7 +110,7 @@ plugins_js  = []
 ############################
 
 # Get user avatars from Gravatar.com? (true/false)
-gravatar = false
+gravatar = true
 
 # Align the main menu to the right of the page? (true/false)
 menu_align_right = true
