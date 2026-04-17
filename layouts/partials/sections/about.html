@@ -1,0 +1,86 @@
+{{ if .Site.Params.about.enable | default false }}
+{{- $about := .Site.Language.Params.about | default .Site.Params.about -}}
+<section id="about" class="py-0 py-sm-5">
+    <div class="container bg-transparent">
+        <h3 class="text-center bg-transparent">{{ $about.title | default (i18n "about") }}</h3>
+        <div class="bg-transparent row justify-content-center px-3 py-5">
+            {{ if .Site.Params.about.image }}
+            <div class="col-sm-12 col-md-8 col-lg-4 mb-5 mb-sm-0 mb-md-5 mb-lg-0 d-none d-sm-none d-md-block">
+                <div class="image d-flex px-5">
+                    <img src="{{ .Site.Params.about.image }}" class="img-thumbnail mx-auto rounded-circle" alt="{{ .Site.Params.title }} profile picture">
+                </div>
+            </div>
+            {{ end }}
+            <div class="col-sm-12 col-md-12 col-lg-8 content">
+                {{ $content := $about.content }}
+                
+                {{ if .Site.Params.about.birthdate_self }}
+                  {{ $birth_self := time.AsTime .Site.Params.about.birthdate_self }}
+                  {{ $age_self := sub now.Year $birth_self.Year }}
+                  {{ if or (lt now.Month $birth_self.Month) (and (eq now.Month $birth_self.Month) (lt now.Day $birth_self.Day)) }}
+                    {{ $age_self = sub $age_self 1 }}
+                  {{ end }}
+                  {{ $content = replace $content "{age_self}" $age_self }}
+                {{ end }}
+
+                {{ if .Site.Params.about.birthdate_kid }}
+                  {{ $birth_kid := time.AsTime .Site.Params.about.birthdate_kid }}
+                  {{ $age_kid := sub now.Year $birth_kid.Year }}
+                  {{ if or (lt now.Month $birth_kid.Month) (and (eq now.Month $birth_kid.Month) (lt now.Day $birth_kid.Day)) }}
+                    {{ $age_kid = sub $age_kid 1 }}
+                  {{ end }}
+                  {{ $content = replace $content "{age_kid}" $age_kid }}
+                {{ end }}
+
+                {{ $content | markdownify }}
+
+                {{ if .Site.Params.about.skills.enable }}
+                <style>
+                .expertise-card {
+                    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                    border: 1px solid rgba(128,128,128,0.15);
+                    border-radius: 12px;
+                }
+                .expertise-card:hover {
+                    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+                    transform: translateY(-4px);
+                }
+                .skill-pill {
+                    font-size: 0.85rem;
+                    padding: 0.4rem 0.8rem;
+                    border-radius: 50rem;
+                    background: rgba(128,128,128,0.1);
+                    border: 1px solid rgba(128,128,128,0.05);
+                    color: inherit;
+                    transition: all 0.2s ease-in-out;
+                    cursor: default;
+                    display: inline-block;
+                }
+                .skill-pill:hover {
+                    background: var(--bs-primary, #0d6efd);
+                    color: white;
+                    transform: translateY(-2px);
+                }
+                </style>
+                
+                <h4 class="mt-5 mb-4 fw-bold">{{ $about.skills.title | default .Site.Params.about.skills.title }}</h4>
+                <div class="row g-4">
+                    {{ range .Site.Params.about.skills.categories }}
+                    <div class="col-12 col-md-6">
+                        <div class="expertise-card p-4 h-100 bg-transparent">
+                            <h5 class="mb-3 fw-semibold" style="letter-spacing: -0.02em;">{{ .name }}</h5>
+                            <div class="d-flex flex-wrap gap-2">
+                                {{ range .items }}
+                                <span class="skill-pill">{{ . }}</span>
+                                {{ end }}
+                            </div>
+                        </div>
+                    </div>
+                    {{ end }}
+                </div>
+                {{ end }}
+            </div>
+        </div>
+    </div>
+</section>
+{{ end }}

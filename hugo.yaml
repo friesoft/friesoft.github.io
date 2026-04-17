@@ -1,0 +1,245 @@
+baseURL: "https://friesoft.github.io"
+languageCode: "en-us"
+title: "Bernhard Friedreich"
+theme: hugo-profile
+
+defaultContentLanguage: "en"
+enableEmoji: true
+
+outputs:
+  home:
+    - "HTML"
+    - "RSS"
+    - "JSON"
+  page:
+    - "HTML"
+    - "RSS"
+
+enableRobotsTXT: true
+
+pagination:
+  pagerSize: 10
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+
+Menus:
+  main:
+    - identifier: about
+      name: About
+      title: About
+      url: /#about
+      weight: 10
+    - identifier: experience
+      name: Experience
+      title: Experience
+      url: /#experience
+      weight: 20
+    - identifier: projects
+      name: Projects
+      title: Projects
+      url: /#projects
+      weight: 30
+    - identifier: kde
+      name: KDE
+      title: KDE Blog
+      url: /kde/
+      weight: 40
+
+params:
+  title: "Bernhard Friedreich"
+  description: "DevOps Engineer & Developer"
+  
+  font:
+    fontSize: 1rem
+    fontWeight: 400
+    lineHeight: 1.5
+    textAlign: left
+
+  navbar:
+    align: ms-auto
+    brandName: "Bernhard Friedreich"
+    disableSearch: true
+    stickyNavBar:
+      enable : true
+      showOnScrollUp : true
+    menus:
+      disableAbout: false
+      disableExperience: false
+      disableProjects: false
+      disableContact: true
+      disableEducation: false
+      disableAchievements: true
+
+  hero:
+    enable: true
+    intro: "Hello, I am"
+    title: "Bernhard Friedreich"
+    subtitle: "DevOps Engineer based in Vienna"
+    image: "/images/avatar.png"
+    content: "I'm a DevOps Engineer based in Vienna, Austria, focused on automation, monitoring, and stable enterprise operations with deep expertise in Single Sign-On (SSO) solutions and GitOps."
+    button:
+      enable: true
+      name: "Get in touch"
+      url: "mailto:friesoft@gmail.com"
+      download: false
+      newPage: false
+    socialLinks:
+      fontAwesomeIcons:
+        - icon: fab fa-github
+          url: https://github.com/friesoft
+        - icon: fab fa-twitter
+          url: https://twitter.com/friesoft_dev
+
+  about:
+    enable: true
+    title: "About Me"
+    birthdate_self: "1991-08-15"
+    birthdate_kid: "2016-12-13"
+    content: |-
+      I'm a DevOps Engineer based in Vienna, Austria. I am {age_self} years old, and I live with my loving wife and our {age_kid}-year-old son. Professionally, my area of work has shifted from being a pure software developer to building up all our tools needed for automation and GitOps. I am also involved in occasional product development direction planning, software architecture, and onboarding and scheduling new employees. I maintain a deep focus on stable operations for large-scale enterprise systems and specialize in **Single Sign-On (SSO)** implementations, working within **Agile** environments and often leveraging AI-assisted development tools to streamline troubleshooting and coding.
+
+      My fascination with computers started early: from summer programming courses in **Volksschule** (elementary school) and reading **Visual Basic** books as a kid, to learning touch-typing on an **electric typewriter** during **Gymnasium** (grammar school).
+
+      My Linux journey began with years of distro-hopping, eventually leading to **Fedora**, which aligns with my professional focus on **RHEL**. I actively use and contribute to **KDE development**, constantly finding and improving the desktop experience based on what I personally use and need.
+
+      Beyond my professional life, I am a passionate **Homelab** enthusiast managing about 50 containers, and developer of **porturl**—a comprehensive SSO portal featuring a Spring Boot backend, a React Admin web frontend, and an Android application.
+    skills:
+      enable: true
+      title: "My Expertise"
+      subtitle: "I have a broad range of skills and experience in various technologies. Here are some of them in no particular order:"
+      categories:
+        - name: "Single Sign-On (SSO)"
+          items: ["Keycloak", "Shibboleth IdP/SP", "Broadcom Siteminder"]
+        - name: "Automation & GitOps"
+          items: ["Puppet", "Ansible", "ArgoCD", "Terraform", "Helm", "Tekton", "Jenkins", "renovatebot"]
+        - name: "Infrastructure & Platforms"
+          items: ["OpenShift", "Red Hat Enterprise Linux (RHEL)", "Fedora", "Docker/Podman", "Portainer", "vagrant", "VirtualBox", "Proxmox"]
+        - name: "Networking & Security"
+          items: ["Wireguard", "Adguardhome", "Unifi", "Openshift ACS"]
+        - name: "Reverse Proxying & Application Servers"
+          items: ["Traefik", "Apache Tomcat", "Apache HTTP Server", "nginx", "Citrix Netscaler"]
+        - name: "Monitoring & Observability"
+          items: ["Elastic Stack", "Logstash", "Splunk", "Zabbix", "Icinga2", "Grafana", "Loki", "Prometheus", "InfluxDB", "OpenTelemetry"]
+        - name: "Software Development"
+          items: ["Java", "Angular", "React", "Kotlin", "Android", "C++", "Bash", "Perl", "Python", "Groovy", "Ruby"]
+        - name: "Frameworks & Libraries"
+          items: ["Spring Boot", "Spring Framework", "Qt", "Lucene", "KDE Frameworks", "React Admin"]
+        - name: "Buildsystems & Buildenvironments"
+          items: ["Maven", "Gradle", "RPM", "mock", "cmake"]
+        - name: "Collaboration & AI"
+          items: ["Jira", "Confluence", "XWiki", "GitLab", "GitHub", "Gemini CLI", "Antigravity", "Copilot"]
+        - name: "Testing & Quality Assurance"
+          items: ["Jira Xray", "Robotframework", "Selenium", "Apache JMeter", "SonarQube"]
+
+  experience:
+    enable: true
+    title: "Experience"
+    items:
+      - company: "Bundesrechenzentrum GmbH"
+        companyUrl: "https://www.brz.gv.at/"
+        jobs:
+          - name: "DevOps Engineer"
+            date: "Jan 2012 - Present"
+            content: "Managing large-scale authentication and identity provider infrastructures."
+            info:
+              content: |
+                - **Enterprise SSO & Identity:** Managing large-scale authentication and identity provider infrastructures.
+                - **CMS & Portals:** Development, Maintenance and operations of major enterprise systems.
+                - **Automation & CI/CD Orchestration:** Designing and maintaining enterprise-grade delivery pipelines and container platforms.
+                - **Monitoring & Platform Reliability:** Ensuring high availability and stability of mission-critical enterprise portals through proactive monitoring, observability, and vulnerability management.
+                - **Software Delivery & Systems Engineering:** Supporting the full lifecycle of enterprise applications, including RPM building for RHEL.
+
+      - company: "EBCONT enterprise technologies GmbH"
+        companyUrl: "https://www.ebcont.com/"
+        jobs:
+          - name: "Junior Consultant"
+            date: "Nov 2010 - Dec 2011"
+            content: "Working at Bundesrechenzentrum GmbH."
+
+      - company: "Otto Bock"
+        companyUrl: "https://www.ottobock.com/"
+        jobs:
+          - name: "Software Engineer (Summer Job)"
+            date: "Jul 2009 - Jul 2009"
+            content: "Rewriting applications from Visual Basic to C#."
+          - name: "Software Engineer (Summer Job)"
+            date: "Jul 2008 - Jul 2008"
+            content: "Rewriting applications from Visual Basic to C#."
+          - name: "Software Engineer (Summer Job)"
+            date: "Aug 2007 - Aug 2007"
+            content: "Rewriting applications from Visual Basic to C#."
+
+      - company: "IVM technologies"
+        jobs:
+          - name: "Software Engineer (Summer Job)"
+            date: "Jul 2007 - Jul 2007"
+            content: "Software development using C#."
+
+  projects:
+    enable: true
+    title: "Projects"
+    items:
+      - title: porturl
+        image: "/images/projects/porturl.webp"
+        content: A Single Sign-On portal with Spring Boot backend, React Admin frontend and an Android app. Designed for streamlined single signon for my homelab.
+        badges:
+          - "Opensource"
+          - "Spring Boot"
+          - "React"
+          - "Android"
+        links:
+          - icon: fab fa-github
+            url: https://github.com/porturl
+
+      - title: KDE
+        image: "/images/projects/kde.svg"
+        content: My contributions and developments for KDE.
+        badges:
+          - "Opensource"
+          - "C++/Qt"
+          - "KDE"
+        featured:
+          name: "View KDE Blog Posts"
+          link: "/kde/"
+      
+      - title: Kinzoku
+        image: "/images/projects/kinzoku.png"
+        content: "A C++ school graduation project at HTL Spengergasse (5th year). A commercial, non-open-source monitoring solution we developed for a small datacenter. It executed system checks via a core C++ engine, complete with an extensible plugin system allowing custom checks written in Python."
+        badges:
+          - "Commercial"
+          - "C++"
+          - "Python"
+          
+      - title: Dinjam
+        image: "/images/projects/dinjam.png"
+        content: A C++/Qt school project at HTL Spengergasse (5th year) focused on building a Visio like application which could be extended with additional functionality using QtScript.
+        badges:
+          - "Opensource"
+          - "C++/Qt"
+        links:
+          - icon: fa fa-link
+            url: https://sourceforge.net/projects/dinjam/
+
+      - title: Allevo
+        image: "/images/projects/allevo.png"
+        content: Two big C++/Qt projects (cost center calculation and double book keeping), developed during my 4th and 5th year at HTL Spengergasse.
+        badges:
+          - "Opensource"
+          - "C++/Qt"
+        links:
+          - icon: fa fa-link
+            url: https://allevo.sourceforge.net/
+
+  education:
+    enable: true
+    index: false
+    items:
+      - title: "Commercial Data Processing"
+        school:
+          name: "HTL Spengergasse"
+          url: "https://www.spengergasse.at/"
+        content: |-
+          Coursework included Cisco CCNA and a basic SAP course.
