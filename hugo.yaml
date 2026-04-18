@@ -29,7 +29,100 @@ params:
   title: "Bernhard Friedreich"
   description: "DevOps Engineer & Developer"
   customCSS: true
-  favicon: "fav.png"
+  favicon: "/fav.png"
+  customScripts: |
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // 1. Finalize Project Card Surgery
+        document.querySelectorAll('#projects .card').forEach(card => {
+          const moreBtn = card.querySelector('.btn-sm');
+          if (moreBtn) {
+            if (moreBtn.textContent.trim() === 'Know more') {
+              moreBtn.textContent = 'More';
+            }
+            const img = card.querySelector('.card-img-top');
+            if (img && img.parentElement.tagName !== 'A') {
+              const link = document.createElement('a');
+              link.href = moreBtn.href;
+              if (moreBtn.target) link.target = moreBtn.target;
+              link.style.display = 'flex';
+              link.style.width = '100%';
+              link.style.height = '100%';
+              link.style.alignItems = 'center';
+              link.style.justifyContent = 'center';
+              img.parentNode.insertBefore(link, img);
+              link.appendChild(img);
+            }
+          }
+        });
+        
+        // 2. Project Footer Link Surgery
+        document.querySelectorAll('#projects .card-footer a:not(.btn)').forEach(link => {
+          link.setAttribute('target', '_blank');
+          link.setAttribute('rel', 'noopener');
+        });
+
+        // 3. Robust Section Highlighting (Manual ScrollSpy)
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+        
+        // Normalize HREFs for home page
+        if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
+          navLinks.forEach(link => {
+            try {
+              const url = new URL(link.href);
+              if (url.hash && url.pathname === window.location.pathname) {
+                link.setAttribute('data-target-id', url.hash.substring(1));
+              }
+            } catch(e) {}
+          });
+        }
+
+        const observerOptions = {
+          root: null,
+          rootMargin: '-20% 0px -70% 0px', // Trigger when section is in top-mid view
+          threshold: 0
+        };
+
+        const observerCallback = (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const id = entry.target.getAttribute('id');
+              // Find matching link for this section
+              const matchingLink = [...navLinks].find(l => 
+                l.getAttribute('data-target-id') === id || 
+                l.getAttribute('href').endsWith('#' + id)
+              );
+              
+              if (matchingLink) {
+                navLinks.forEach(link => link.classList.remove('active'));
+                matchingLink.classList.add('active');
+              }
+            }
+          });
+        };
+
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+        sections.forEach(section => observer.observe(section));
+
+        // 4. Subpage Context Highlighting
+        const isProjectSubpage = window.location.pathname.includes('/projects/');
+        if (isProjectSubpage) {
+          navLinks.forEach(link => {
+            if (link.getAttribute('aria-label') === 'projects') {
+              link.classList.add('active');
+            }
+          });
+        }
+
+        // 5. Hero Area Cleanup: Clear highlights when at the very top
+        window.addEventListener('scroll', () => {
+          if (window.scrollY < 150 && !isProjectSubpage) {
+            navLinks.forEach(link => link.classList.remove('active'));
+          }
+        });
+      });
+    </script>
   
   font:
     fontSize: 1rem
@@ -41,11 +134,11 @@ params:
     align: ms-auto
     brandName: "Bernhard Friedreich"
     showBrandLogo: true
-    brandLogo: "fav.png"
+    brandLogo: "/fav.png"
     disableSearch: true
     stickyNavBar:
       enable : true
-      showOnScrollUp : true
+      showOnScrollUp : false
     menus:
       disableAbout: false
       disableExperience: false
@@ -60,6 +153,8 @@ params:
     title: "Bernhard Friedreich"
     subtitle: "DevOps Engineer based in Vienna"
     image: "/images/avatar.png"
+    bottomImage:
+      enable: false
     content: "I'm a DevOps Engineer based in Vienna, Austria, focused on automation, monitoring, and stable enterprise operations with deep expertise in Single Sign-On (SSO) solutions and GitOps."
     button:
       enable: true
@@ -123,22 +218,27 @@ params:
         companyUrl: "https://www.brz.gv.at/"
         jobs:
           - name: "DevOps Engineer"
-            date: "Jan 2012 - Present"
-            content: "Managing large-scale authentication and identity provider infrastructures."
-            info:
-              content: |
-                - **Enterprise SSO & Identity:** Managing large-scale authentication and identity provider infrastructures.
-                - **CMS & Portals:** Development, Maintenance and operations of major enterprise systems.
-                - **Automation & CI/CD Orchestration:** Designing and maintaining enterprise-grade delivery pipelines and container platforms.
-                - **Monitoring & Platform Reliability:** Ensuring high availability and stability of mission-critical enterprise portals through proactive monitoring, observability, and vulnerability management.
-                - **Software Delivery & Systems Engineering:** Supporting the full lifecycle of enterprise applications, including RPM building for RHEL.
+            date: "Jan 2014 - Present"
+            content: |
+              - **Foundational Tooling & Platform Engineering:** Architected and built our team's core automation platform and tooling infrastructure from the ground up, establishing the technical foundation for our current operations.
+              - **CI/CD & GitOps Transformation:** Designed and implemented the enterprise-grade delivery pipelines and container orchestration strategies that drove our team's transition to GitOps.
+              - **Monitoring & Observability Systems:** Established the comprehensive monitoring, observability, and alerting systems ensuring the high availability of mission-critical enterprise portals.
+              - **Enterprise SSO & Identity:** Managing and scaling large-scale authentication and identity provider infrastructures for core government services.
+              - **Software Delivery & Systems Engineering:** Supporting the full lifecycle of enterprise applications.
+          - name: "Software Developer and Operations Engineer"
+            date: "Jan 2012 - Dec 2013"
+            content: |
+              - **CMS & Portals:** Development, Maintenance and operations of major enterprise systems.
 
       - company: "EBCONT enterprise technologies GmbH"
         companyUrl: "https://www.ebcont.com/"
         jobs:
           - name: "Junior Consultant"
             date: "Nov 2010 - Dec 2011"
-            content: "Working at Bundesrechenzentrum GmbH."
+            content: |
+              **Working at Bundesrechenzentrum GmbH.**
+                - **Portals:** Development of major enterprise portal systems using Java.
+
 
       - company: "Otto Bock"
         companyUrl: "https://www.ottobock.com/"
@@ -154,6 +254,7 @@ params:
             content: "Rewriting applications from Visual Basic to C#."
 
       - company: "IVM technologies"
+        companyUrl: "https://www.ivm.at/"
         jobs:
           - name: "Software Engineer (Summer Job)"
             date: "Jul 2007 - Jul 2007"

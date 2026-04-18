@@ -1,12 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title>Redirecting...</title>
     <link rel="canonical" href="{{ .Params.redirect_to | relURL }}"/>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta http-equiv="refresh" content="0; url={{ .Params.redirect_to | relURL }}" />
+    <style>
+        /* Immediate theme detection to prevent flash */
+        html { background-color: #eaedf0; }
+        @media (prefers-color-scheme: dark) {
+            html { background-color: #18191a; }
+        }
+    </style>
+    <script>
+        (function() {
+            const theme = localStorage.getItem('pref-theme');
+            if (theme === 'dark') {
+                document.documentElement.style.backgroundColor = '#18191a';
+            } else if (theme === 'light') {
+                document.documentElement.style.backgroundColor = '#eaedf0';
+            }
+        })();
+    </script>
   </head>
   <body>
-    <p>Redirecting to <a href="{{ .Params.redirect_to | relURL }}">{{ .Params.redirect_to }}</a>...</p>
+    <p style="font-family: sans-serif; padding: 20px;">Redirecting to <a href="{{ .Params.redirect_to | relURL }}">{{ .Params.redirect_to }}</a>...</p>
   </body>
 </html>

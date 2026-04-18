@@ -1,0 +1,174 @@
+{{ define "head" }}
+<meta name="description" content="{{ .Params.description }}">
+<link rel="stylesheet" href="{{ (printf "%scss/single.css" (.Site.Params.staticPath | default "")) | relURL }}">
+
+<!-- fontawesome -->
+<script defer src="{{ (printf "%sfontawesome-6/all-6.4.2.js" (.Site.Params.staticPath | default "")) | relURL }}"></script>
+
+<style>
+  .dev-info-box {
+    background: rgba(var(--bs-primary-rgb), 0.05);
+    border-left: 4px solid var(--bs-primary);
+    border-radius: 4px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .dev-info-box h5 {
+    margin-top: 0;
+    color: var(--bs-primary);
+  }
+  .status-badge {
+    font-size: 0.8rem;
+    padding: 0.3em 0.6em;
+    border-radius: 10px;
+    font-weight: 600;
+  }
+  .status-merged { background-color: #28a745; color: white; }
+  .status-open { background-color: #007bff; color: white; }
+  .status-abandoned { background-color: #6c757d; color: white; }
+  .status-work-in-progress { background-color: #ffc107; color: black; }
+  .status-pending-review { background-color: #fd7e14; color: white; }
+  .status-idea { background-color: #6610f2; color: white; }
+</style>
+{{ end }}
+
+{{ define "title" }}
+{{.Title }} | {{ .Site.Title }}
+{{ end }}
+
+{{ define "main" }}
+<section id="single">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-sm-12 col-md-12 col-lg-9">
+        <div class="pr-lg-4">
+          <div class="title mb-5">
+            <h1 class="text-center mb-4">{{ .Title }}</h1>
+            <div class="text-center">
+              {{ if .Params.author }}
+                {{ .Params.author }}
+                <small>|</small>
+              {{ end }}
+              {{ .Date | time.Format (":date_medium" | default "Jan 2, 2006") }}
+
+              {{ if or (.Site.Params.singlePages.readTime.enable | default true) (.Params.enableReadingTime) }}
+              <span id="readingTime">
+                {{ .Site.Params.singlePages.readTime.content | default (i18n "min_read") }}
+              </span>
+              {{ end }}
+            </div>
+          </div>
+
+          {{ if .Params.image }}
+          <div class="featured-image">
+            <img class="img-fluid mx-auto d-block" src="{{ .Params.image }}" alt="{{ .Title }}">
+          </div>
+          {{ end }}
+
+          <article class="page-content p-2">
+            <!-- Development Info Box -->
+            {{ if or .Params.merge_requests .Params.branches }}
+            <div class="dev-info-box">
+              <h5><i class="fas fa-code-branch me-2"></i> Development Info</h5>
+              <ul class="list-unstyled mb-0">
+                {{ range .Params.merge_requests }}
+                <li class="mb-2">
+                  <strong>Merge Request:</strong> <a href="{{ .url }}" target="_blank">{{ .url }}</a>
+                  {{ if .status }}
+                  <span class="status-badge status-{{ .status | urlize }} ml-2">{{ .status }}</span>
+                  {{ end }}
+                  {{ if .release }}
+                  <small class="text-muted d-block mt-1">Target Release: {{ .release }}</small>
+                  {{ end }}
+                </li>
+                {{ end }}
+                {{ range .Params.branches }}
+                <li class="mb-2">
+                  <strong>Branch:</strong> <a href="{{ .url }}" target="_blank">{{ default .url .name }}</a>
+                  {{ if .status }}
+                  <span class="status-badge status-{{ .status | urlize }} ml-2">{{ .status }}</span>
+                  {{ end }}
+                </li>
+                {{ end }}
+              </ul>
+            </div>
+            {{ end }}
+
+            {{ .Content | emojify }}
+          </article>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-3">
+        <div id="stickySideBar" class="sticky-sidebar">
+          {{ if .Params.toc | default true}}
+          <aside class="toc">
+              <h5>
+                {{ .Site.Params.terms.toc | default (i18n "toc") }}
+              </h5>
+              <div class="toc-content">
+                {{.TableOfContents}}
+              </div>
+          </aside>
+          {{ end }}
+
+          {{ if .Params.tags }}
+          <aside class="tags">
+            <h5>{{ .Site.Params.terms.tags | default (i18n "tags") }}</h5>
+            <ul class="tags-ul list-unstyled list-inline">
+              {{range .Params.tags}}
+              {{ $tagURL := printf "tags/%s" (. | urlize) }}
+              <li class="list-inline-item"><a href="{{ $tagURL | relLangURL }}">{{.}}</a></li>
+              {{end}}
+            </ul>
+          </aside>
+          {{end}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="p-2 px-3" onclick="topFunction()" id="topScroll">
+    <i class="fas fa-angle-up"></i>
+  </button>
+</section>
+
+{{ if or (.Site.Params.singlePages.scrollprogress.enable | default true) (.Params.enableScrollProgress) }}
+<div class="progress">
+  <div id="scroll-progress-bar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+<script src="{{ (printf "%sjs/scrollProgressBar.js" (.Site.Params.staticPath | default "")) | relURL }}"></script>
+{{ end }}
+
+<script>
+  var topScroll = document.getElementById("topScroll");
+  window.onscroll = function() {scrollFunction()};
+
+  function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      topScroll.style.display = "block";
+    } else {
+      topScroll.style.display = "none";
+    }
+  }
+
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+
+  // To set height of sticky sidebar dynamically
+  let stickySideBarElem = document.getElementById("stickySideBar");
+  let stickyNavBar = {{ .Site.Params.navbar.stickyNavBar.enable | default false }};
+  if(stickyNavBar) {
+    let headerElem = document.getElementById("profileHeader");
+    let headerHeight = headerElem ? headerElem.offsetHeight + 15 : 70;
+    stickySideBarElem.style.top = headerHeight + "px";
+  } else {
+    stickySideBarElem.style.top = "50px";
+  }
+</script>
+
+{{ if or (.Site.Params.singlePages.readTime.enable | default true) (.Params.enableReadingTime) }}
+<script src="{{ (printf "%sjs/readingTime.js" (.Site.Params.staticPath | default "")) | relURL }}"></script>
+{{end}}
+
+{{ end }}

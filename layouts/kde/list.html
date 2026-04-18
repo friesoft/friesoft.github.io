@@ -1,0 +1,84 @@
+{{ define "head" }}
+<meta name="description" content="{{ .Title }} of {{ .Site.Title }}">
+<link rel="stylesheet" href="{{ (printf "%scss/projects.css" (.Site.Params.staticPath | default "")) | relURL }}" media="all">
+
+<!-- fontawesome -->
+<script defer src="{{ (printf "%sfontawesome-6/all-6.4.2.js" (.Site.Params.staticPath | default "")) | relURL }}"></script>
+
+<style>
+  .status-badge {
+    font-size: 0.75rem;
+    padding: 0.3em 0.6em;
+    border-radius: 10px;
+    font-weight: 600;
+  }
+  .status-merged, .status-released { background-color: #28a745; color: white; }
+  .status-open { background-color: #007bff; color: white; }
+  .status-abandoned { background-color: #6c757d; color: white; }
+  .status-work-in-progress, .status-wip { background-color: #ffc107; color: black; }
+  .status-pending-review { background-color: #fd7e14; color: white; }
+  .status-idea { background-color: #6610f2; color: white; }
+
+  .card-idea {
+    border-style: dashed !important;
+    border-width: 2px !important;
+    opacity: 0.9;
+  }
+  .dark .card-idea {
+    background-color: rgba(255, 255, 255, 0.03) !important;
+  }
+</style>
+{{ end }}
+
+{{ define "title" }}
+{{.Title }} | {{ .Site.Title }}
+{{ end }}
+
+{{ define "main" }}
+<div class="container pt-5" id="projects">
+    <h2 class="text-center pb-2">{{.Title}} Tech Updates</h2>
+    <div class="row">
+        {{ range .Paginator.Pages }}
+        <div class="col-lg-4 col-md-6 my-3">
+            {{ $isIdea := eq (.Params.status | urlize) "idea" }}
+            <div class="card my-3 h-100 {{ if $isIdea }}card-idea{{ end }}" title="{{ .Title }}">
+                {{ if .Params.image }}
+                <div class="card-head">
+                    <img class="card-img-top" src="{{ .Params.image }}" alt="{{ .Title }}">
+                </div>
+                {{ end }}
+                <div class="card-body bg-transparent p-3">
+                    <div class="pb-2 bg-transparent">
+                        {{ if .Params.status }}
+                        <span class="status-badge status-{{ .Params.status | urlize }}">{{ .Params.status }}</span>
+                        {{ end }}
+                        {{ range .Params.tags }}
+                        <span class="badge badge-secondary">{{ . }}</span>
+                        {{ end }}
+                    </div>
+                    <h5 class="card-title bg-transparent">{{ .Title | truncate 50 }}</h5>
+                    <div class="card-text bg-transparent secondary-font">
+                        {{ .Summary | truncate 100 | safeHTML }}
+                    </div>
+                </div>
+                <div class="card-footer py-3">
+                    <span class="float-start bg-transparent text-secondary small">
+                        <i class="far fa-calendar-alt me-1"></i> {{ .Date | time.Format "2006-01-02" }}
+                    </span>
+                    <span class="float-end">
+                        <a class="btn btn-sm" href="{{ .RelPermalink }}">
+                            {{ if $isIdea }}View Idea{{ else }}Read Update{{ end }}
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+        {{ end }}
+        <div class="row justify-content-center">
+            <div class="col-auto m-3">
+                {{template "_internal/pagination.html" . }}
+            </div>
+        </div>
+    </div>
+</div>
+{{ end }}
