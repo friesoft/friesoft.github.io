@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Screenlocker on Bernhard Friedreich</title><link>https://friesoft.github.io/tags/screenlocker/</link><description>Recent content in Screenlocker on Bernhard Friedreich</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 29 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://friesoft.github.io/tags/screenlocker/index.xml" rel="self" type="application/rss+xml"/><item><title>PIN Unlock with autosubmit for Plasma Screenlocker</title><link>https://friesoft.github.io/projects/kde/pin-unlock-screenlocker/</link><pubDate>Sun, 29 Mar 2026 00:00:00 +0000</pubDate><guid>https://friesoft.github.io/projects/kde/pin-unlock-screenlocker/</guid><description>&lt;p&gt;I&amp;rsquo;m trying to bring native PIN unlock with auto-submit support to the Plasma Screenlocker, mimicking the experience found on Windows.&lt;/p&gt;
+&lt;h3 id="the-objective"&gt;The Objective&lt;/h3&gt;
+&lt;p&gt;The goal is to allow users to set a numeric PIN in the &amp;ldquo;Users&amp;rdquo; KCM, which can then be used to quickly unlock the desktop using a short PIN but still keeping your strong password as a fallback.&lt;/p&gt;
+&lt;p&gt;This includes:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Auto-submit&lt;/strong&gt;: The lockscreen automatically attempts to unlock once the entered PIN length matches the configured length.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Numeric Keypad&lt;/strong&gt;: A dedicated keypad UI on the lockscreen for touch and mouse friendliness.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;TPM 2.0 Integration&lt;/strong&gt;: If TPM 2.0 is available PINs can be saved using the &lt;code&gt;pinpam&lt;/code&gt; PAM module that interacts with the TPM.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="technical-implementation"&gt;Technical Implementation&lt;/h3&gt;
+&lt;p&gt;The feature consists of multiple components:&lt;/p&gt;</description></item></channel></rss>

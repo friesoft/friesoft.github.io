@@ -25,3 +25,97 @@
     max-width: 100%;
     object-fit: contain;
 }
+
+/* Header, Footer, and Avatar Logo common boxed styling */
+#hero .image img,
+.navbar-brand img,
+footer img[alt="Footer logo"] {
+    background-color: var(--secondary-color) !important;
+    padding: 2px;
+    border: 1.5px solid #bdc3c7;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    vertical-align: middle !important;
+}
+
+/* Specific radius for smaller logos */
+.navbar-brand img,
+footer img[alt="Footer logo"] {
+    height: 40px !important;
+    width: 40px !important;
+    border-radius: 6px;
+}
+
+.navbar-brand {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Navbar item alignment & ScrollSpy configuration */
+body {
+    position: relative !important;
+}
+
+.navbar .navbar-nav {
+    align-items: center !important;
+}
+
+/* Fix for sticky navbar overlapping headings (Home Page & Articles) */
+section[id],
+.page-content h1[id],
+.page-content h2[id],
+.page-content h3[id],
+.page-content h4[id],
+.page-content h5[id],
+.page-content h6[id] {
+    scroll-margin-top: 100px;
+}
+
+/* Highlighting for the current active section */
+#navbarContent .nav-link.active {
+    color: var(--primary-color) !important;
+    font-weight: 700 !important;
+    opacity: 1 !important;
+}
+
+/* Theme toggle button cleanup */
+#theme-toggle {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding: 0.5rem !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+/* Smooth theme transition + Disable Smooth Scrolling */
+html {
+    scroll-behavior: auto !important;
+}
+
+html,
+body, 
+header, 
+footer, 
+#content,
+.container,
+.card, 
+.navbar, 
+section,
+.dropdown-menu,
+#search,
+#hero .image img,
+.navbar-brand img,
+footer img[alt="Footer logo"] {
+    transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease !important;
+}
+
+.dark #hero .image img,
+.dark .navbar-brand img,
+.dark footer img[alt="Footer logo"] {
+    background-color: var(--secondary-background-color-dark) !important;
+    border-color: #555;
+}
