@@ -1,4 +1,4 @@
-/* projects (overridden to control image sizes) */
+/* projects */
 
 #projects h3 {
     color: var(--text-secondary-color) !important;
@@ -30,13 +30,9 @@
     transform: translateY(-7px);
 }
 
-/* Updated card-head to restrict height and properly align logos */
 #projects .card .card-head {
-    height: 180px;
-    padding: 1.5rem 1.5rem 0 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    -o-object-fit: cover;
+    object-fit: cover;
     overflow: hidden;
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
@@ -49,16 +45,11 @@
 }
 
 #projects .card:hover .card-img-top {
-    transform: scale(1.1); /* Reduced scale so it doesn't pop out too violently */
+    transform: scale(1.2);
     transition: all 0.3s ease-out;
 }
 
-/* Updated card-img-top to fit gracefully within the restricted head */
 #projects .card-img-top {
-    max-height: 100%;
-    width: auto;
-    max-width: 100%;
-    object-fit: contain;
     transition: transform 0.3s;
 }
 
