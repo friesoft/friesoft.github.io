@@ -1,0 +1,27 @@
+#single .featured-image img {
+    max-height: 200px;
+    width: auto !important;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Projects card image overrides */
+#projects .card .card-head {
+    height: 180px;
+    padding: 1.5rem 1.5rem 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#projects .card:hover .card-img-top {
+    transform: scale(1.1);
+}
+
+#projects .card-img-top {
+    max-height: 100%;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+}

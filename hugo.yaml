@@ -25,32 +25,11 @@ markup:
     renderer:
       unsafe: true
 
-Menus:
-  main:
-    - identifier: about
-      name: About
-      title: About
-      url: /#about
-      weight: 10
-    - identifier: experience
-      name: Experience
-      title: Experience
-      url: /#experience
-      weight: 20
-    - identifier: projects
-      name: Projects
-      title: Projects
-      url: /#projects
-      weight: 30
-    - identifier: kde
-      name: KDE
-      title: KDE Blog
-      url: /kde/
-      weight: 40
-
 params:
   title: "Bernhard Friedreich"
   description: "DevOps Engineer & Developer"
+  customCSS: true
+  favicon: "fav.png"
   
   font:
     fontSize: 1rem
@@ -61,6 +40,8 @@ params:
   navbar:
     align: ms-auto
     brandName: "Bernhard Friedreich"
+    showBrandLogo: true
+    brandLogo: "fav.png"
     disableSearch: true
     stickyNavBar:
       enable : true
@@ -181,57 +162,7 @@ params:
   projects:
     enable: true
     title: "Projects"
-    items:
-      - title: porturl
-        image: "/images/projects/porturl.webp"
-        content: A Single Sign-On portal with Spring Boot backend, React Admin frontend and an Android app. Designed for streamlined single signon for my homelab.
-        badges:
-          - "Opensource"
-          - "Spring Boot"
-          - "React"
-          - "Android"
-        links:
-          - icon: fab fa-github
-            url: https://github.com/porturl
-
-      - title: KDE
-        image: "/images/projects/kde.svg"
-        content: My contributions and developments for KDE.
-        badges:
-          - "Opensource"
-          - "C++/Qt"
-          - "KDE"
-        featured:
-          name: "View KDE Blog Posts"
-          link: "/kde/"
-      
-      - title: Kinzoku
-        image: "/images/projects/kinzoku.png"
-        content: "A C++ school graduation project at HTL Spengergasse (5th year). A commercial, non-open-source monitoring solution we developed for a small datacenter. It executed system checks via a core C++ engine, complete with an extensible plugin system allowing custom checks written in Python."
-        badges:
-          - "Commercial"
-          - "C++"
-          - "Python"
-          
-      - title: Dinjam
-        image: "/images/projects/dinjam.png"
-        content: A C++/Qt school project at HTL Spengergasse (5th year) focused on building a Visio like application which could be extended with additional functionality using QtScript.
-        badges:
-          - "Opensource"
-          - "C++/Qt"
-        links:
-          - icon: fa fa-link
-            url: https://sourceforge.net/projects/dinjam/
-
-      - title: Allevo
-        image: "/images/projects/allevo.png"
-        content: Two big C++/Qt projects (cost center calculation and double book keeping), developed during my 4th and 5th year at HTL Spengergasse.
-        badges:
-          - "Opensource"
-          - "C++/Qt"
-        links:
-          - icon: fa fa-link
-            url: https://allevo.sourceforge.net/
+    items: []
 
   education:
     enable: true
