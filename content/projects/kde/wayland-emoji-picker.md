@@ -1,6 +1,7 @@
 ---
 title: "KWin Plugin: Emoji Picker"
 date: 2026-04-18
+image: "/images/projects/kde/kwin-emoji-chooser-2.png"
 type: "kde"
 status: "Work in Progress"
 tags: ["KDE", "KWin", "Wayland", "Emoji"]
@@ -9,7 +10,7 @@ merge_requests:
     status: "Work in Progress"
 ---
 
-I wanted to easily type emojis on my laptop and noticed that the current `plasma-emojier` is a standalone application which only copies the emoji to the clipboard. My goal was to type emojis directly into the application I'm using. This is a much faster and more seamless workflow.
+I want to easily type emojis on my laptop and noticed that the current `plasma-emojier` is a standalone application which only copies the emoji to the clipboard. My goal was to type emojis directly into the application I'm using. This is a much faster and more seamless workflow.
 
 To achieve this goal I looked into preexisting solutions in KDE and found KEmoji, a KDE Frameworks library for emojis. I also looked into how other compositors handle this and found that implementing it as a KWin plugin would be a good solution.
 
@@ -22,3 +23,8 @@ By moving the emoji picker into KWin, we can safely bypass Wayland's strict inpu
 2. **kemoji Library**: We've adopted the new KDE Frameworks library, `kemoji`, for the backend. This provides unified models and data for emojis, search, and history.
 3. **Secure Injection**: Upon selection, KWin calls `InputMethod::commitString()` to safely inject the emoji into the active text buffer.
 4. **Input Interception**: Keyboard events are temporarily routed to the overlay's search field without stealing focus from the target application, preventing flicker or glitches.
+
+
+![kwin-emoji-chooser-1](/images/projects/kde/kwin-emoji-chooser-1.png)
+
+![kwin-emoji-chooser-2](/images/projects/kde/kwin-emoji-chooser-2.png)
