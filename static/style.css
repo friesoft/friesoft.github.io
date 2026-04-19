@@ -19,6 +19,14 @@
     transform: scale(1.1);
 }
 
+#projects .card:hover .card-title {
+    color: var(--primary-color) !important;
+}
+
+#projects .card-title {
+    transition: color 0.4s ease !important;
+}
+
 #projects .card-img-top {
     max-height: 100%;
     width: auto;

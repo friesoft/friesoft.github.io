@@ -40,6 +40,7 @@ params:
             if (moreBtn.textContent.trim() === 'Know more') {
               moreBtn.textContent = 'More';
             }
+            // 1.1 Image Surgery
             const img = card.querySelector('.card-img-top');
             if (img && img.parentElement.tagName !== 'A') {
               const link = document.createElement('a');
@@ -52,6 +53,17 @@ params:
               link.style.justifyContent = 'center';
               img.parentNode.insertBefore(link, img);
               link.appendChild(img);
+            }
+            // 1.2 Title Surgery
+            const title = card.querySelector('.card-title');
+            if (title && title.parentElement.tagName !== 'A') {
+              const link = document.createElement('a');
+              link.href = moreBtn.href;
+              if (moreBtn.target) link.target = moreBtn.target;
+              link.classList.add('text-decoration-none');
+              link.style.color = 'inherit';
+              title.parentNode.insertBefore(link, title);
+              link.appendChild(title);
             }
           }
         });
