@@ -127,3 +127,16 @@ footer img[alt="Footer logo"] {
     background-color: var(--secondary-background-color-dark) !important;
     border-color: #555;
 }
+
+/* Vertical alignment fix for hero section buttons */
+#hero .row {
+    align-items: center !important;
+}
+
+#hero .btn, 
+#hero .btn.social-icon {
+    margin-top: 50px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
