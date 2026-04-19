@@ -129,7 +129,7 @@ footer img[alt="Footer logo"] {
 }
 
 /* Vertical alignment fix for hero section buttons */
-#hero .row {
+#hero .row .row {
     align-items: center !important;
 }
 
