@@ -1,0 +1,17 @@
+version: 2
+updates:
+  # Maintain dependencies for Hugo Modules
+  - package-ecosystem: "gomod"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    groups:
+      hugo-dependencies:
+        patterns:
+          - "*"
+
+  # Maintain GitHub Actions dependencies
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
