@@ -24,6 +24,7 @@ By moving the emoji picker into KWin, we can safely bypass Wayland's strict inpu
 3. **Secure Injection**: Upon selection, KWin calls `InputMethod::commitString()` to safely inject the emoji into the active text buffer.
 4. **Input Interception**: Keyboard events are temporarily routed to the overlay's search field without stealing focus from the target application, preventing flicker or glitches.
 
+The picker can be easily triggered using Meta + . (period) and allows you to search for emojis and insert them into the active text buffer.
 
 ![kwin-emoji-chooser-1](/images/projects/kde/kwin-emoji-chooser-1.png)
 
